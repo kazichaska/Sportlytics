@@ -25,16 +25,29 @@ function soccerData() {
 
 soccerData();
 
-function leagueApiData() {
+function teamApiData() {
     
     // var nbaApi = "http://data.nba.net/10s/prod/v1/today.json"
-    var leagueRoaster = "http://data.nba.net/10s/prod/v1/2021/coaches.json"
-    fetch(leagueRoaster)
+    var teamUrl = "http://data.nba.net/10s/prod/v2/2021/teams.json"
+    fetch(teamUrl)
     .then(async function(response) {
-        var leagueData = await response.json();
-        console.log(leagueData);
+        var teamData = await response.json();
+        console.log(teamData);
     });
 }
 
-leagueApiData();
+teamApiData();
+
+function playerApiData() {
+    
+    // var nbaApi = "http://data.nba.net/10s/prod/v1/today.json"
+    var playerUrl = "http://data.nba.net/10s/prod/v2/2021/teams.json"
+    fetch(playerUrl)
+    .then(async function(response) {
+        var playerData = await response.json();
+        console.log(playerData);
+    });
+}
+
+playerApiData();
 
