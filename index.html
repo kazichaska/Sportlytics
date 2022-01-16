@@ -4,10 +4,104 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>Sportlytics</title>
 </head>
 <body>
-    
+
+    <!-- Header start -->
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">    
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+
+          <div class="navbar-start">
+
+            <a class="navbar-item logo">
+              Sportlytics
+            </a>
+      
+            <a class="navbar-item" href="https://github.com/kazichaska/Sportlytics">
+              GitHub Repo
+            </a>
+
+          </div>
+      
+          <div class="navbar-end">
+
+          </div>
+        </div>
+      </nav>
+      <!-- Header end -->
+
+      <!-- Start NBA Section -->
+      <section class="section nba">
+
+          <h1 class="title">NBA Team Rosters</h1>
+          <p class="subtitle is-4">Choose a team to see Players</p>
+          
+          <!-- Dropdown menu -->
+          <div class="select">
+            <select>
+              <option>Select a Team</option>
+              <option>Team #1</option>
+              <option>Team #2</option>
+              <option>Team #3</option>
+              <option>Team #4</option>
+              <option>Team #5</option>
+              <option>Team #6</option>
+            </select>
+          </div>
+          <!-- Dropdown menu end -->
+
+          <button class="button is-dark">See Roster</button>
+
+          
+            <!-- Team table -->
+            <div class="container is-fluid">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Player Number</th>
+                        <th>Player Name</th>
+                        <th>Other Info possibly</th>
+                        <th>Wins/Points per game/etc.</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>61</td>
+                        <td>Bobby Smith</td>
+                      </tr>
+                      <tr>
+                        <td>21</td>
+                        <td>Derek Robin</td>
+                      </tr>
+                      <tr>
+                        <td>45</td>
+                        <td>Bobby Smith</td>
+                      </tr>
+                      <tr>
+                        <td>72</td>
+                        <td>Bobby Smith</td>
+                      </tr>
+                      <tr>
+                        <td>11</td>
+                        <td>Bobby Smith</td>
+                      </tr>
+                      <tr>
+                        <td>57</td>
+                        <td>Bobby Smith</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+            <!-- Team table -->
+
+          
+          
+      </section>
+      <!-- End NBA Section -->
 
     <script src="./asset/js/script.js"></script>
 </body>
