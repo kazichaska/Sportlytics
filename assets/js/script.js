@@ -5,30 +5,28 @@ function getCovidData() {
     //var covidApiUrl = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/us_only?min_date=2022-01-01T00:00:00.000Z&max_date=2022-01-01T00:00:00.000Z&state=Alabama&hide_fields=_id, date, country, combined_name, fips, uid";
     //var covidApiUrl = "https://covid-19-data.p.rapidapi.com/country/code?code=canada";
     //var covidApiUrl = "https://covid19-api.com/country?name=canada&format=json";
+    var covidApiUrl = "https://data.cdc.gov/resource/9mfq-cb36.json"
     fetch(covidApiUrl)
         .then(async function (response) {
             var data = await response.json();
-            console.log(data.length);
-           
+            console.log(data);
         })
-
-
 }
 
-//getCovidData();
+getCovidData();
 
 
-function soccerData() {
+function playerData() {
 
-    var soccerUrl = "https://app.sportdataapi.com/api/v1/status?apikey=bc937e20-740c-11ec-9f34-271cd849eb30&continent=Europe"
-    fetch(soccerUrl)
+    var playerUrl = "http://data.nba.net/10s/prod/v1/2021/players.json"
+    fetch(playerUrl)
         .then(async function (response) {
-            var soccerData = await response.json();
-            console.log(soccerData);
+            var playerData = await response.json();
+            console.log(playerData);
         });
 }
 
-//soccerData();
+playerData();
 
 function teamApiData() {
 
@@ -46,19 +44,5 @@ function teamApiData() {
 }
 
 teamApiData();
-
-function playerApiData() {
-
-    // var nbaApi = "http://data.nba.net/10s/prod/v1/today.json"
-    var playerUrl = "http://data.nba.net/10s/prod/v2/2021/teams.json"
-    fetch(playerUrl)
-        .then(async function (response) {
-            var playerData = await response.json();
-            console.log(playerData);
-        });
-}
-
-playerApiData();
-//getCovidData();
 
 
