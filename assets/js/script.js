@@ -1,5 +1,8 @@
 
 
+
+var playerData;
+
 function getCovidData() {
 
     //var covidApiUrl = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/us_only?min_date=2022-01-01T00:00:00.000Z&max_date=2022-01-01T00:00:00.000Z&state=Alabama&hide_fields=_id, date, country, combined_name, fips, uid";
@@ -13,20 +16,53 @@ function getCovidData() {
         })
 }
 
-getCovidData();
+//getCovidData();
 
+function dataTest(data) {
+
+    if ((typeof (data) !== "undefined") && (typeof (data) !== null)) {
+        return data
+    }
+    else {
+        return "unknown";
+    }
+
+
+}
 
 function playerData() {
 
-    var playerUrl = "http://data.nba.net/10s/prod/v1/2021/players.json"
+    var team = $("#teams option:selected").val();
+    console.log("Team ID : " + team);
+    $("#players").empty();
+    var playerUrl = "http://data.nba.net/10s/prod/v1/2021/players.json";
     fetch(playerUrl)
         .then(async function (response) {
-            var playerData = await response.json();
+            playerData = await response.json();
             console.log(playerData);
+
+
+            for (var i = 0; i < playerData.league.standard.length; i++) {
+                if (parseInt(playerData.league.standard[i].teamId) == parseInt(team)) {
+                    $("#players").append('<tr><td>' + playerData.league.standard[i].jersey + '</td>' +
+                        '<td>' + playerData.league.standard[i].firstName + 
+                        ' ' + playerData.league.standard[i].lastName + '</td>' +
+                        '<td>' + playerData.league.standard[i].yearsPro + '</td>' +
+                        '<td>' + playerData.league.standard[i].heightFeet + "'" +
+                        playerData.league.standard[i].heightInches + '</td>' +
+                        '<td>' + playerData.league.standard[i].collegeName + '</td></tr>');
+                }
+
+                
+
+            }
+
+            console.log(players);
+
+
         });
 }
 
-playerData();
 
 function teamApiData() {
 
@@ -44,5 +80,6 @@ function teamApiData() {
 }
 
 teamApiData();
+$("#teams").change(playerData);
 
 

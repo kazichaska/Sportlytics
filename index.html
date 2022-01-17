@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./asset/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <title>Sportlytics</title>
 </head>
@@ -48,7 +48,7 @@
           </div>
           <!-- Dropdown menu end -->
 
-          <button class="button is-dark">See Roster</button>
+          <!-- <button id="roster" class="button is-dark">See Roster</button> -->
 
           
             <!-- Team table -->
@@ -58,35 +58,13 @@
                       <tr>
                         <th>Player Number</th>
                         <th>Player Name</th>
-                        <th>Other Info possibly</th>
-                        <th>Wins/Points per game/etc.</th>
+                        <th>Years in NBA</th>
+                        <th>Height</th>
+                        <th>College</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>61</td>
-                        <td>Bobby Smith</td>
-                      </tr>
-                      <tr>
-                        <td>21</td>
-                        <td>Derek Robin</td>
-                      </tr>
-                      <tr>
-                        <td>45</td>
-                        <td>Bobby Smith</td>
-                      </tr>
-                      <tr>
-                        <td>72</td>
-                        <td>Bobby Smith</td>
-                      </tr>
-                      <tr>
-                        <td>11</td>
-                        <td>Bobby Smith</td>
-                      </tr>
-                      <tr>
-                        <td>57</td>
-                        <td>Bobby Smith</td>
-                      </tr>
+                    <tbody id="players">
+                      
                     </tbody>
                   </table>
             </div>
@@ -145,6 +123,6 @@
     <!-- End NBA Section -->
 
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./asset/js/script.js"></script>
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
