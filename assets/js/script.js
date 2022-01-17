@@ -1,16 +1,27 @@
 
 
+
+
+
 function getCovidData() {
 
     //var covidApiUrl = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/us_only?min_date=2022-01-01T00:00:00.000Z&max_date=2022-01-01T00:00:00.000Z&state=Alabama&hide_fields=_id, date, country, combined_name, fips, uid";
-    //var covidApiUrl = "https://covid-19-data.p.rapidapi.com/country/code?code=canada";
+    //var covidApiUrl = ""https://data.cdc.gov/resource/9mfq-cb36.json";
     //var covidApiUrl = "https://covid19-api.com/country?name=canada&format=json";
-    var covidApiUrl = "https://data.cdc.gov/resource/9mfq-cb36.json"
+    var covidApiUrl = "https://api.covidtracking.com/v1/states/current.json"
     fetch(covidApiUrl)
         .then(async function (response) {
-            var data = await response.json();
-            console.log(data);
-        })
+            var covidData = await response.json();
+            console.log(covidData[50].state);
+
+            for (var i = 0; i < covidData.length; i++) {
+                $("#covid").append('<option value="' + covidData[i].state + '">');
+                console.log(covidData[i].state);
+            }
+            $(".covid").change(function() {
+                alert("Handler for .change() called.");
+            })
+        });
 }
 
 getCovidData();
