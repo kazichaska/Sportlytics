@@ -105,35 +105,38 @@
         
         <!-- Dropdown menu -->
         <div class="select covid">
-          <select id="covid">
+          <select id="covidstate">
             <option>Select state</option>
           </select>
         </div>
         <!-- Dropdown menu end -->
-
-        <button class="button is-dark">See Detail Data</button>
-
         
           <!-- covid data table -->
           <div class="container is-fluid">
               <table class="table">
                   <thead>
                     <tr>
-                      <th>New Case</th>
-                      <th>Confirmed Case</th>
-                      <th>Total Cases</th>
-                      <th>Total Death</th>
+                      <th>Date</th>
+                      <th>Tested Positive</th>
+                      <th>Death</th>
+                      <th>Hospitalized</th>
+                      <th>OnVentilatorCurrently</th>
+                      <th>TotalTestsViral</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>01</td>
-                      <td>Michigan</td>
+                      <td id="date"></td>
+                      <td id="testpostive"></td>
+                      <td id="death"></td>
+                      <td id="hospital"></td>
+                      <td id="onventilator"></td>
+                      <td id="viral"></td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                       <td>02</td>
                       <td>Minnesota</td>
-                    </tr>
+                    </tr> -->
                   </tbody>
                 </table>
           </div>

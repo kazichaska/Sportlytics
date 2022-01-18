@@ -1,25 +1,50 @@
 
-
-
-
-
 function getCovidData() {
 
-    //var covidApiUrl = "https://webhooks.mongodb-stitch.com/api/client/v2.0/app/covid-19-qppza/service/REST-API/incoming_webhook/us_only?min_date=2022-01-01T00:00:00.000Z&max_date=2022-01-01T00:00:00.000Z&state=Alabama&hide_fields=_id, date, country, combined_name, fips, uid";
-    //var covidApiUrl = ""https://data.cdc.gov/resource/9mfq-cb36.json";
-    //var covidApiUrl = "https://covid19-api.com/country?name=canada&format=json";
     var covidApiUrl = "https://api.covidtracking.com/v1/states/current.json"
     fetch(covidApiUrl)
         .then(async function (response) {
             var covidData = await response.json();
-            console.log(covidData[50].state);
+            // console.log(covidData[50].state);
 
             for (var i = 0; i < covidData.length; i++) {
-                $("#covid").append('<option value="' + covidData[i].state + '">');
-                console.log(covidData[i].state);
+                $("#covidstate").append('<option value="' + [i] + '">' + covidData[i].state + '</option');
+                // console.log(covidData);
             }
             $(".covid").change(function() {
-                alert("Handler for .change() called.");
+                event.preventDefault();
+                pickedState = (event.target.value);
+                console.log(pickedState);
+                console.log(covidData[pickedState].death);
+                var dateEl = document.createElement('p');
+                var dateNo = (covidData[pickedState].date);
+                var testPositiveEl = document.createElement('p');
+                var testPositiveNo = (covidData[pickedState].positive);
+                var deathEl = document.createElement('p');
+                var deathNo = (covidData[pickedState].death);
+                var hospitalizedEl = document.createElement('p');
+                var hospitalNo = (covidData[pickedState].hospitalized);
+                var onVentilatorEl = document.createElement('p');
+                var ventilator = (covidData[pickedState].onVentilatorCurrently);
+                var testViralEl = document.createElement('p');
+                var testViral = (covidData[pickedState].totalTestsViral);
+                // console.log(deathNo);
+                // console.log(hospitalNo);
+                $("#date").append(dateEl);
+                dateEl.textContent = dateNo;
+                $("#testpositive").append(testPositiveEl);
+                testPositiveEl.textContent = testPositiveNo;
+                $("#death").append(deathEl);
+                deathEl.textContent = deathNo;
+                $("#hospital").append(hospitalizedEl);
+                hospitalizedEl.textContent = hospitalNo;
+                $("#onventilator").append(onVentilatorEl);
+                onVentilatorEl.textContent = ventilator;
+                $("#viral").append(testViralEl);
+                testViralEl.textContent = testViral;
+                // $("#death").append("Total death for " + (covidData[pickedState].state) + " is: " + deathNo);
+                // $("#death").html(covidData[pickedState].death);
+                // $("hospital").html(covidData[pickedState].hospitalized);
             })
         });
 }
