@@ -12,7 +12,12 @@ function getCovidData() {
                 // console.log(covidData);
             }
             $(".covid").change(function() {
-                event.preventDefault();
+                $("#date").empty();
+                $("#testpositive").empty();
+                $("#death").empty();
+                $("#hospital").empty();
+                $("#onventilator").empty();
+                $("#viral").empty();
                 pickedState = (event.target.value);
                 console.log(pickedState);
                 console.log(covidData[pickedState].death);
