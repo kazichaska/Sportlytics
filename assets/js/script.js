@@ -1,8 +1,42 @@
 
 
+var savedTeams = [];
 
 var playerData;
 
+
+function loadTeamList(teamID, teamName) {
+    $("#teams").append('<option value="' + teamID + '">' + teamName + '</option');
+}
+
+function storeTeam(teamID, teamName) {
+    var nbaTeam = {
+        name : "",
+        teamId : ""
+    };
+
+    nbaTeam.name = teamName;
+    nbaTeam.teamId = teamID;
+    savedTeams.push(nbaTeam);
+    localStorage.setItem('nbaTeams', JSON.stringify(savedTeams));
+
+}
+
+function loadTeams() {
+
+    savedTeams = JSON.parse(localStorage.getItem('nbaTeams'));
+    if (!savedTeams) {
+        savedTeams = [];
+        console.log("Loading Teams from api");
+        teamApiData();
+    }
+    else {
+        console.log("Loading Teams from localStorage");
+        for (var i = 0; i < savedTeams.length; i++) {
+            loadTeamList(savedTeams[i].teamId, savedTeams[i].name);
+        }
+    }
+}
 function getCovidData() {
 
     var covidApiUrl = "https://api.covidtracking.com/v1/states/current.json"
@@ -75,13 +109,13 @@ function dataTest(data) {
 function playerData() {
 
     var team = $("#teams option:selected").val();
-    console.log("Team ID : " + team);
+    //console.log("Team ID : " + team);
     $("#players").empty();
     var playerUrl = "http://data.nba.net/10s/prod/v1/2021/players.json";
     fetch(playerUrl)
         .then(async function (response) {
             playerData = await response.json();
-            console.log(playerData);
+            //console.log(playerData);
 
 
             for (var i = 0; i < playerData.league.standard.length; i++) {
@@ -99,7 +133,7 @@ function playerData() {
 
             }
 
-            console.log(players);
+            //console.log(players);
 
 
         });
@@ -113,17 +147,20 @@ function teamApiData() {
     fetch(teamUrl)
         .then(async function (response) {
             var teamData = await response.json();
-            console.log(teamData);
+            //console.log(teamData);
 
             for (var i = 0; i < teamData.league.standard.length; i++) {
                 if (teamData.league.standard[i].isNBAFranchise) {
-                    $("#teams").append('<option value="' + teamData.league.standard[i].teamId + '">' + teamData.league.standard[i].fullName + '</option');
+                    loadTeamList(teamData.league.standard[i].teamId, teamData.league.standard[i].fullName);
+                    storeTeam(teamData.league.standard[i].teamId, teamData.league.standard[i].fullName);
                 }
             }
+            
         });
 }
 
-teamApiData();
+//teamApiData();
+loadTeams();
 $("#teams").change(playerData);
 
 
