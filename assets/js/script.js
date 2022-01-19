@@ -92,7 +92,7 @@ function getCovidData() {
         });
 }
 
-//getCovidData();
+getCovidData();
 
 function dataTest(data) {
 
