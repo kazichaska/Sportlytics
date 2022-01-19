@@ -87,7 +87,7 @@ function playerData() {
             for (var i = 0; i < playerData.league.standard.length; i++) {
                 if (parseInt(playerData.league.standard[i].teamId) == parseInt(team)) {
                     $("#players").append('<tr><td>' + playerData.league.standard[i].jersey + '</td>' +
-                        '<td>' + playerData.league.standard[i].firstName + 
+                        '<td>' + playerData.league.standard[i].firstName +
                         ' ' + playerData.league.standard[i].lastName + '</td>' +
                         '<td>' + playerData.league.standard[i].yearsPro + '</td>' +
                         '<td>' + playerData.league.standard[i].heightFeet + "'" +
@@ -95,7 +95,7 @@ function playerData() {
                         '<td>' + playerData.league.standard[i].collegeName + '</td></tr>');
                 }
 
-                
+
 
             }
 
@@ -116,7 +116,9 @@ function teamApiData() {
             console.log(teamData);
 
             for (var i = 0; i < teamData.league.standard.length; i++) {
-                $("#teams").append('<option value="' + teamData.league.standard[i].teamId + '">' + teamData.league.standard[i].fullName + '</option');
+                if (teamData.league.standard[i].isNBAFranchise) {
+                    $("#teams").append('<option value="' + teamData.league.standard[i].teamId + '">' + teamData.league.standard[i].fullName + '</option');
+                }
             }
         });
 }
