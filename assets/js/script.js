@@ -1,14 +1,13 @@
-
-
+// Variables
 var savedTeams = [];
-
 var playerData;
 
-
+// loads team list into drop down menu
 function loadTeamList(teamID, teamName) {
     $("#teams").append('<option value="' + teamID + '">' + teamName + '</option');
 }
 
+// stores team info into local storage
 function storeTeam(teamID, teamName) {
     var nbaTeam = {
         name : "",
@@ -22,6 +21,7 @@ function storeTeam(teamID, teamName) {
 
 }
 
+// load saved teams from local storage and display them
 function loadTeams() {
 
     savedTeams = JSON.parse(localStorage.getItem('nbaTeams'));
@@ -37,6 +37,62 @@ function loadTeams() {
         }
     }
 }
+
+// fetch player data from api and populate table 
+function playerData() {
+
+    var team = $("#teams option:selected").val();
+    //console.log("Team ID : " + team);
+    $("#players").empty();
+    var playerUrl = "http://data.nba.net/10s/prod/v1/2021/players.json";
+    fetch(playerUrl)
+        .then(async function (response) {
+            playerData = await response.json();
+            //console.log(playerData);
+
+            // for loop to populate table with player data
+            for (var i = 0; i < playerData.league.standard.length; i++) {
+                if (parseInt(playerData.league.standard[i].teamId) == parseInt(team)) {
+                    $("#players").append('<tr><td>' + playerData.league.standard[i].jersey + '</td>' +
+                        '<td>' + playerData.league.standard[i].firstName +
+                        ' ' + playerData.league.standard[i].lastName + '</td>' +
+                        '<td>' + playerData.league.standard[i].yearsPro + '</td>' +
+                        '<td>' + playerData.league.standard[i].heightFeet + "'" +
+                        playerData.league.standard[i].heightInches + '</td>' +
+                        '<td>' + playerData.league.standard[i].collegeName + '</td></tr>');
+                }
+
+
+
+            }
+
+            //console.log(players);
+
+
+        });
+}
+
+// fetch team list from api and populate dropdown menu
+function teamApiData() {
+
+    // var nbaApi = "http://data.nba.net/10s/prod/v1/today.json"
+    var teamUrl = "http://data.nba.net/10s/prod/v2/2021/teams.json"
+    fetch(teamUrl)
+        .then(async function (response) {
+            var teamData = await response.json();
+            //console.log(teamData);
+
+            for (var i = 0; i < teamData.league.standard.length; i++) {
+                if (teamData.league.standard[i].isNBAFranchise) {
+                    loadTeamList(teamData.league.standard[i].teamId, teamData.league.standard[i].fullName);
+                    storeTeam(teamData.league.standard[i].teamId, teamData.league.standard[i].fullName);
+                }
+            }
+            
+        });
+}
+
+// fetch covid data from api and display on page
 function getCovidData() {
 
     var covidApiUrl = "https://api.covidtracking.com/v1/states/current.json"
@@ -45,10 +101,13 @@ function getCovidData() {
             var covidData = await response.json();
             // console.log(covidData[50].state);
 
+            // populate drop down menu
             for (var i = 0; i < covidData.length; i++) {
                 $("#covidstate").append('<option value="' + [i] + '">' + covidData[i].state + '</option');
                 // console.log(covidData);
             }
+
+            // empty existing elements in table
             $(".covid").change(function() {
                 $("#date").empty();
                 $("#testpositive").empty();
@@ -56,9 +115,13 @@ function getCovidData() {
                 $("#hospital").empty();
                 $("#onventilator").empty();
                 $("#viral").empty();
+
+                // setting picked state from drop down menu to a variable
                 pickedState = (event.target.value);
                 console.log(pickedState);
                 console.log(covidData[pickedState].death);
+
+                // create html elements and data variables
                 var dateEl = document.createElement('p');
                 var dateNo = (covidData[pickedState].date);
                 var testPositiveEl = document.createElement('p');
@@ -73,6 +136,8 @@ function getCovidData() {
                 var testViral = (covidData[pickedState].totalTestsViral);
                 // console.log(deathNo);
                 // console.log(hospitalNo);
+
+                // fill and append html elements to page
                 $("#date").append(dateEl);
                 dateEl.textContent = dateNo;
                 $("#testpositive").append(testPositiveEl);
@@ -104,59 +169,6 @@ function dataTest(data) {
     }
 
 
-}
-
-function playerData() {
-
-    var team = $("#teams option:selected").val();
-    //console.log("Team ID : " + team);
-    $("#players").empty();
-    var playerUrl = "http://data.nba.net/10s/prod/v1/2021/players.json";
-    fetch(playerUrl)
-        .then(async function (response) {
-            playerData = await response.json();
-            //console.log(playerData);
-
-
-            for (var i = 0; i < playerData.league.standard.length; i++) {
-                if (parseInt(playerData.league.standard[i].teamId) == parseInt(team)) {
-                    $("#players").append('<tr><td>' + playerData.league.standard[i].jersey + '</td>' +
-                        '<td>' + playerData.league.standard[i].firstName +
-                        ' ' + playerData.league.standard[i].lastName + '</td>' +
-                        '<td>' + playerData.league.standard[i].yearsPro + '</td>' +
-                        '<td>' + playerData.league.standard[i].heightFeet + "'" +
-                        playerData.league.standard[i].heightInches + '</td>' +
-                        '<td>' + playerData.league.standard[i].collegeName + '</td></tr>');
-                }
-
-
-
-            }
-
-            //console.log(players);
-
-
-        });
-}
-
-
-function teamApiData() {
-
-    // var nbaApi = "http://data.nba.net/10s/prod/v1/today.json"
-    var teamUrl = "http://data.nba.net/10s/prod/v2/2021/teams.json"
-    fetch(teamUrl)
-        .then(async function (response) {
-            var teamData = await response.json();
-            //console.log(teamData);
-
-            for (var i = 0; i < teamData.league.standard.length; i++) {
-                if (teamData.league.standard[i].isNBAFranchise) {
-                    loadTeamList(teamData.league.standard[i].teamId, teamData.league.standard[i].fullName);
-                    storeTeam(teamData.league.standard[i].teamId, teamData.league.standard[i].fullName);
-                }
-            }
-            
-        });
 }
 
 //teamApiData();
