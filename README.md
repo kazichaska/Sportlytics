@@ -1,5 +1,8 @@
 # Sportlytics
 
+### Link of deployed application: 
+https://kazichaska.github.io/Sportlytics/ 
+
 ##  Purpose
 A one stop website where you can get information about your favorite NBA team and get up to date stats about Covid-19.
 
@@ -11,8 +14,12 @@ A one stop website where you can get information about your favorite NBA team an
 * NBA API: http://data.nba.net/10s/prod/v1/2021/players.json
 * Covid-19 API: https://api.covidtracking.com/v1/states/current.json
 
-## Website URL
-https://example.ex
+
+### Screenshots of the code
+![index](./assets/images/index.png)
+![script](./assets/images/script.png)
+![application](./assets/images/application.png)
+
 
 ## In use
 

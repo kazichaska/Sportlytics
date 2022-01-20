@@ -54,7 +54,7 @@ function playerData() {
     var team = $("#teams option:selected").val();
     //console.log("Team ID : " + team);
     $("#players").empty();
-    var playerUrl = "http://data.nba.net/10s/prod/v1/2021/players.json";
+    var playerUrl = "https://data.nba.net/10s/prod/v1/2021/players.json";
     fetch(playerUrl)
         .then(async function (response) {
             playerData = await response.json();
@@ -80,7 +80,7 @@ function playerData() {
 function teamApiData() {
 
     // var nbaApi = "http://data.nba.net/10s/prod/v1/today.json"
-    var teamUrl = "http://data.nba.net/10s/prod/v2/2021/teams.json"
+    var teamUrl = "https://data.nba.net/10s/prod/v2/2021/teams.json"
     fetch(teamUrl)
         .then(async function (response) {
             var teamData = await response.json();
