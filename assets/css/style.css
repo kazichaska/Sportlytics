@@ -6,3 +6,12 @@
 .logo{
     font-size: 26px;
 }
+
+section{
+    background-color: #C2D3CD;
+}
+
+body{
+    height: 100vh;
+    background-color: #C2D3CD;
+}
