@@ -17,7 +17,9 @@ A one stop website where you can get information about your favorite NBA team an
 
 ### Screenshots of the code
 ![index](./assets/images/index.png)
+
 ![script](./assets/images/script.png)
+
 ![application](./assets/images/application.png)
 
 
